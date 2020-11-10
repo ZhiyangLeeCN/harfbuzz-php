@@ -1,0 +1,35 @@
+ARG_WITH("harfbuzz", "for harfbuzz support", "no");
+
+if (PHP_HARFBUZZ != "no") {
+
+	if (CHECK_HEADER_ADD_INCLUDE("hb.hh", "CFLAGS_HARFBUZZ", configure_module_dirname + "\\lib\\src;" + PHP_HARFBUZZ)) {
+
+		EXTENSION("harfbuzz", "harfbuzz.c hb_res.c\
+			hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c", true, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1\
+			-wd4244 -wd4267 -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_WARNINGS -DU_DISABLE_VERSION_SUFFIX=0");
+		
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_MMAP");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_RESOURCE_FORK");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_SUBSET_LAYOUT");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_SUBSET_CFF");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_FALLBACK_SHAPE");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_EXPERIMENTAL_API");
+		ADD_SOURCES(configure_module_dirname + "/lib/src", "hb-aat-layout.cc hb-aat-map.cc hb-blob.cc\
+			hb-buffer-serialize.cc hb-buffer.cc hb-common.cc hb-coretext.cc hb-directwrite.cc\
+			hb-draw.cc hb-face.cc hb-fallback-shape.cc hb-font.cc hb-ft.cc hb-gdi.cc hb-glib.cc\
+			hb-gobject-structs.cc hb-graphite2.cc hb-icu.cc hb-map.cc hb-number.cc hb-ot-cff1-table.cc\
+			hb-ot-cff2-table.cc hb-ot-color.cc hb-ot-face.cc hb-ot-font.cc hb-ot-layout.cc hb-ot-map.cc\
+			hb-ot-math.cc hb-ot-meta.cc hb-ot-metrics.cc hb-ot-name.cc hb-ot-shape-complex-arabic.cc\
+			hb-ot-shape-complex-default.cc hb-ot-shape-complex-hangul.cc hb-ot-shape-complex-hebrew.cc\
+			hb-ot-shape-complex-indic-table.cc hb-ot-shape-complex-indic.cc hb-ot-shape-complex-khmer.cc\
+			hb-ot-shape-complex-myanmar.cc hb-ot-shape-complex-thai.cc hb-ot-shape-complex-use-table.cc\
+			hb-ot-shape-complex-use.cc hb-ot-shape-complex-vowel-constraints.cc hb-ot-shape-fallback.cc\
+			hb-ot-shape-normalize.cc hb-ot-shape.cc hb-ot-tag.cc hb-ot-var.cc hb-set.cc hb-shape-plan.cc\
+			hb-shape.cc hb-shaper.cc hb-static.cc hb-style.cc hb-subset-cff-common.cc hb-subset-cff1.cc\
+			hb-subset-cff2.cc hb-subset-input.cc hb-subset-plan.cc hb-subset.cc hb-ucd.cc hb-unicode.cc hb-uniscribe.cc", "harfbuzz");
+
+	} else {
+		WARNING("harfbuzz not enabled; libraries and headers not found");
+	}
+}
+
