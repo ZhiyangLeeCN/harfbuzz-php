@@ -19,7 +19,7 @@ PHP_FUNCTION(hb_set_add)
     hb_subset_input_t *input = PHP_HB_RES_FETCH(Z_RES_P(val), hb_subset_input_t);
     hb_set_t *codepoints = hb_subset_input_unicode_set (input);
 
-    hb_set_add (codepoints, codepoint);
+    hb_set_add(codepoints, codepoint);
 }
 
 PHP_FUNCTION(hb_subset)

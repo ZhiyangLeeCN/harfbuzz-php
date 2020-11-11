@@ -16,40 +16,43 @@ PHP_FUNCTION(hb_blob_create_from_file)
 PHP_FUNCTION(hb_blob_get_length)
 {
     zval *val = NULL;
+    size_t len = 0;
     
     ZEND_PARSE_PARAMETERS_START(1, 1)
         Z_PARAM_RESOURCE(val)
     ZEND_PARSE_PARAMETERS_END();
 
     hb_blob_t *blob = PHP_HB_RES_FETCH(Z_RES_P(val), hb_blob_t);
-    unsigned int len = hb_blob_get_length(blob);
+    len = hb_blob_get_length(blob);
 
     RETURN_LONG(len);
 }
 
-PHP_FUNCTION(hb_blob_get_data)
+PHP_FUNCTION(hb_blob_write_data)
 {
-    zval *val = NULL;
-    zend_string *result = NULL;
-    const char *ptr = NULL;
     const char *data = NULL;
-    unsigned length = 0;
+    zval *out = NULL;
+    zval *res = NULL;
+    php_stream *stream = NULL;
+    size_t ret = 0;
+    unsigned int len = 0;
+
     
-    ZEND_PARSE_PARAMETERS_START(1, 1)
-        Z_PARAM_RESOURCE(val)
+    ZEND_PARSE_PARAMETERS_START(2, 2)
+        Z_PARAM_RESOURCE(out)
+        Z_PARAM_RESOURCE(res)
     ZEND_PARSE_PARAMETERS_END();
 
-    hb_blob_t *blob = PHP_HB_RES_FETCH(Z_RES_P(val), hb_blob_t);
-    data = hb_blob_get_data(blob, &length);
+    hb_blob_t *blob = PHP_HB_RES_FETCH(Z_RES_P(res), hb_blob_t);
+    data = hb_blob_get_data(blob, &len);
 
-    if (length == 0) {
-        RETURN_EMPTY_STRING();
+    if (len == 0) {
+        RETURN_LONG(0);
     } else {
-        result = zend_string_alloc(length, 0);
-        ptr = ZSTR_VAL(result);
-        memcpy((void *)ptr, data, length);
+        php_stream_from_res(stream, Z_RES_P(out));
+        ret = php_stream_write(stream, data, len);
 
-        RETURN_STRING(result);
+        RETURN_LONG(ret);
     }
 }
 

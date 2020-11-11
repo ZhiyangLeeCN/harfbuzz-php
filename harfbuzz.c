@@ -41,7 +41,7 @@ PHP_MINFO_FUNCTION(harfbuzz)
 const zend_function_entry harfbuzz_functions[] = {
     PHP_FE(hb_blob_create_from_file,            arginfo_hb_blob_create_from_file)
     PHP_FE(hb_blob_get_length,                  arginfo_hb_blob_get_length)
-    PHP_FE(hb_blob_get_data,                    arginfo_hb_blob_get_data)
+    PHP_FE(hb_blob_write_data,                  arginfo_hb_blob_write_data)
     PHP_FE(hb_blob_destroy,                     arginfo_hb_blob_destroy)
 
     PHP_FE(hb_face_create,                      arginfo_hb_face_create)
