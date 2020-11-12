@@ -9,11 +9,13 @@ if test "$PHP_HARFBUZZ" != "no"; then
 
     PHP_ADD_INCLUDE(lib/src)
 
+    PHP_REQUIRE_CXX()
+    PHP_CXX_COMPILE_STDCXX(11, mandatory, PHP_HARFBUZZ_STDCXX)
     HARFBUZZ_FLAGS="-DHB_NO_MMAP -DHB_NO_RESOURCE_FORK -DHB_NO_SUBSET_LAYOUT -DHB_NO_SUBSET_CFF -DHB_NO_FALLBACK_SHAPE -DHB_EXPERIMENTAL_API"
+    PHP_HARFBUZZ_CXX_FLAGS="$HARFBUZZ_FLAGS $PHP_HARFBUZZ_STDCXX"
+
     PHP_HARFBUZZ_SOURCES="harfbuzz.c hb_res.c\
 			hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c"
-    PHP_NEW_EXTENSION(harfbuzz, $PHP_HARFBUZZ_SOURCES, $ext_shared, ,$HARFBUZZ_FLAGS)
-
     LIB_HARFBUZZ_SOURCES="lib/src/hb-aat-layout.cc lib/src/hb-aat-map.cc lib/src/hb-blob.cc\
 			lib/src/hb-buffer-serialize.cc lib/src/hb-buffer.cc lib/src/hb-common.cc lib/src/hb-coretext.cc lib/src/hb-directwrite.cc\
 			lib/src/hb-draw.cc lib/src/hb-face.cc lib/src/hb-fallback-shape.cc lib/src/hb-font.cc lib/src/hb-ft.cc lib/src/hb-gdi.cc lib/src/hb-glib.cc\
@@ -27,14 +29,6 @@ if test "$PHP_HARFBUZZ" != "no"; then
 			lib/src/hb-ot-shape-normalize.cc lib/src/hb-ot-shape.cc lib/src/hb-ot-tag.cc lib/src/hb-ot-var.cc lib/src/hb-set.cc lib/src/hb-shape-plan.cc\
 			lib/src/hb-shape.cc lib/src/hb-shaper.cc lib/src/hb-static.cc lib/src/hb-style.cc lib/src/hb-subset-cff-common.cc lib/src/hb-subset-cff1.cc\
 			lib/src/hb-subset-cff2.cc lib/src/hb-subset-input.cc lib/src/hb-subset-plan.cc lib/src/hb-subset.cc lib/src/hb-ucd.cc lib/src/hb-unicode.cc lib/src/hb-uniscribe.cc"
-
-    PHP_REQUIRE_CXX()
-    PHP_CXX_COMPILE_STDCXX(11, mandatory, PHP_HARFBUZZ_STDCXX)
-    PHP_HARFBUZZ_CXX_FLAGS="$HARFBUZZ_FLAGS $PHP_HARFBUZZ_STDCXX"
-    if test "$ext_shared" = "no"; then
-        PHP_ADD_SOURCES($HARFBUZZ_EXIT_DIR, $LIB_HARFBUZZ_SOURCES, $PHP_HARFBUZZ_CXX_FLAGS)
-    else
-        PHP_ADD_SOURCES_X($HARFBUZZ_EXIT_DIR, $LIB_HARFBUZZ_SOURCES, $PHP_HARFBUZZ_CXX_FLAGS, shared_objects_intl, yes)
-    fi
-    
+    SROUCES="$PHP_HARFBUZZ_SOURCES $LIB_HARFBUZZ_SOURCES"
+    PHP_NEW_EXTENSION(harfbuzz, $SROUCES, $ext_shared, ,$PHP_HARFBUZZ_CXX_FLAGS)
 fi
