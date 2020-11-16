@@ -8,11 +8,14 @@ if (PHP_HARFBUZZ != "no") {
 			hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c", true, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1\
 			-wd4244 -wd4267 -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_WARNINGS -DU_DISABLE_VERSION_SUFFIX=0");
 		
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HAVE_INTEL_ATOMIC_PRIMITIVES");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HAVE_ROUNDF");
 		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_MMAP");
 		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_RESOURCE_FORK");
 		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_SUBSET_LAYOUT");
 		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_SUBSET_CFF");
 		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_FALLBACK_SHAPE");
+		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_NO_WIN1256");
 		ADD_FLAG("CFLAGS_HARFBUZZ", "/D HB_EXPERIMENTAL_API");
 		ADD_SOURCES(configure_module_dirname + "/lib/src", "hb-aat-layout.cc hb-aat-map.cc hb-blob.cc\
 			hb-buffer-serialize.cc hb-buffer.cc hb-common.cc hb-coretext.cc hb-directwrite.cc\
