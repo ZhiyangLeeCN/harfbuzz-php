@@ -38,7 +38,7 @@ if test "$PHP_HARFBUZZ" != "no"; then
     PHP_NEW_EXTENSION(harfbuzz, $PHP_HARFBUZZ_SOURCES, $ext_shared, ,$PHP_HARFBUZZ_CXX_FLAGS)
 
     PHP_HARFBUZZ_CXX_FLAGS="$PHP_HARFBUZZ_CXX_FLAGS -std=c++11"
-    LIB_ICU_SOURCES="third_party/icu/source/common/appendable.cpp third_party/icu/source/common/bmpset.cpp \
+    LIB_ICU_SOURCES="third_party/icu/source/stubdata/stubdata.cpp third_party/icu/source/common/appendable.cpp third_party/icu/source/common/bmpset.cpp \
       third_party/icu/source/common/brkeng.cpp third_party/icu/source/common/brkiter.cpp \
       third_party/icu/source/common/bytesinkutil.cpp third_party/icu/source/common/bytestream.cpp \
       third_party/icu/source/common/bytestrie.cpp third_party/icu/source/common/bytestriebuilder.cpp \
