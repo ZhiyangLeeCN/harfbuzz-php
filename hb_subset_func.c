@@ -1,4 +1,5 @@
 #include "hb_subset_func.h"
+#include "cc_wrapper/hb_subset_helper.h"
 
 PHP_FUNCTION(hb_subset_input_create_or_fail)
 {
@@ -9,17 +10,20 @@ PHP_FUNCTION(hb_subset_input_create_or_fail)
 PHP_FUNCTION(hb_set_add)
 {
     zval *val = NULL;
-    zend_long codepoint;
+    char *s = NULL;
+	size_t s_len = 0;
+    zend_long z_added = 0;
     
     ZEND_PARSE_PARAMETERS_START(2, 2)
         Z_PARAM_RESOURCE(val)
-        Z_PARAM_LONG(codepoint)
+        Z_PARAM_STRING(s, s_len)
     ZEND_PARSE_PARAMETERS_END();
 
     hb_subset_input_t *input = PHP_HB_RES_FETCH(Z_RES_P(val), hb_subset_input_t);
     hb_set_t *codepoints = hb_subset_input_unicode_set (input);
 
-    hb_set_add(codepoints, codepoint);
+    z_added = hb_ut_set_add(codepoints, s, s_len);
+    RETURN_LONG(z_added);
 }
 
 PHP_FUNCTION(hb_subset)

@@ -4,19 +4,23 @@ if (PHP_HARFBUZZ != "no") {
 	
 	ADD_FLAG("CFLAGS_HARFBUZZ", "/I " + configure_module_dirname + "/third_party/harfbuzz-ng/src");
 	ADD_FLAG("CFLAGS_HARFBUZZ", "/I " + configure_module_dirname + "/third_party/icu/source/common");
-	ADD_FLAG("CFLAGS_HARFBUZZ", "/I " + configure_module_dirname + "/third_party/icu/source/common/unicode");
 	ADD_FLAG("CFLAGS_HARFBUZZ", "/I " + configure_module_dirname + "/third_party/icu/source/i18n");
-	ADD_FLAG("CFLAGS_HARFBUZZ", "/I " + configure_module_dirname + "/third_party/icu/source/i18n/unicode");
 
-	EXTENSION("harfbuzz", "harfbuzz.c hb_res.c\
-		hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c", true, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1\
-		-wd4244 -wd4267 -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_WARNINGS -DU_DISABLE_VERSION_SUFFIX=0");
-
-	ADD_FLAG("CFLAGS_HARFBUZZ", "/D U_USING_ICU_NAMESPACE=0 /D U_ENABLE_DYLOAD=0 /D U_ENABLE_TRACING=1 /D U_ENABLE_RESOURCE_TRACING=0\
+	var libIcuCxxFlags = "/D U_USING_ICU_NAMESPACE=0 /D U_ENABLE_DYLOAD=0 /D U_ENABLE_TRACING=1 /D U_ENABLE_RESOURCE_TRACING=0\
 		/D ICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE /D UCHAR_TYPE=wchar_t /D UCONFIG_ONLY_HTML_CONVERSION=1 /D UCONFIG_USE_WINDOWS_LCID_MAPPING_API=0\
 		/D U_CHARSET_IS_UTF8=1 /D U_STATIC_IMPLEMENTATION /D U_COMMON_IMPLEMENTATION /D U_ICUDATAENTRY_IN_COMMON\
-		/D U_I18N_IMPLEMENTATION /wd4005 /wd4068 /wd4267 /utf-8");
+		/D U_I18N_IMPLEMENTATION /wd4005 /wd4068 /wd4267 /utf-8";
+	var libHarfbuzzCxxFlags = "/D HAVE_ICU /D HAVE_ICU_BUILTIN /D HAVE_INTEL_ATOMIC_PRIMITIVES /D HAVE_ROUNDF /D HB_NO_MMAP /D HB_NO_RESOURCE_FORK\
+		 /D HB_NO_SUBSET_LAYOUT /D HB_NO_SUBSET_CFF /D HB_NO_FALLBACK_SHAPE /D HB_NO_UCD /D HB_NO_WIN1256 /D HB_EXPERIMENTAL_API /wd4334";
+
+	ADD_FLAG("CFLAGS_HARFBUZZ", libIcuCxxFlags);
+	ADD_FLAG("CFLAGS_HARFBUZZ", libHarfbuzzCxxFlags);
 	
+	EXTENSION("harfbuzz", "harfbuzz.c hb_res.c\
+		hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c", true, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1\
+		-wd4244 -wd4267 -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_WARNINGS -DU_DISABLE_VERSION_SUFFIX=0" + " " + libIcuCxxFlags + " " + libHarfbuzzCxxFlags);
+	
+	ADD_SOURCES(configure_module_dirname + "/cc_wrapper", "hb_subset_helper.cpp", "harfbuzz");
 	ADD_SOURCES(configure_module_dirname + "/third_party/icu/source/stubdata", "stubdata.cpp", "harfbuzz");
 	ADD_SOURCES(configure_module_dirname + "/third_party/icu/source/common", "appendable.cpp bmpset.cpp brkeng.cpp\
 		brkiter.cpp bytesinkutil.cpp bytestream.cpp\
@@ -165,9 +169,6 @@ if (PHP_HARFBUZZ != "no") {
 		utrans.cpp vtzone.cpp vzone.cpp\
 		windtfmt.cpp winnmfmt.cpp wintzimpl.cpp\
 		zonemeta.cpp zrule.cpp ztrans.cpp", "harfbuzz");
-		
-	ADD_FLAG("CFLAGS_HARFBUZZ", "/D HAVE_INTEL_ATOMIC_PRIMITIVES /D HAVE_ROUNDF /D HB_NO_MMAP /D HB_NO_RESOURCE_FORK\
-		 /D HB_NO_SUBSET_LAYOUT /D HB_NO_SUBSET_CFF /D HB_NO_FALLBACK_SHAPE /D HB_NO_WIN1256 /D HB_EXPERIMENTAL_API");
 
 	ADD_SOURCES(configure_module_dirname + "/third_party/harfbuzz-ng/src", "hb-aat-layout.cc hb-aat-map.cc hb-blob.cc\
 		hb-buffer-serialize.cc hb-buffer.cc hb-common.cc hb-coretext.cc hb-directwrite.cc\

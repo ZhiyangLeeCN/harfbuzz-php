@@ -12,11 +12,7 @@
 
 #include "hb_res.h"
 
-//harfbuzz lib include
-#include "hb.h"
-#include "hb-ot.h"
-#include "hb-subset.h"
-
+#include "cc_wrapper/cc_api_wrapper.h"
 
 extern zend_module_entry harfbuzz_module_entry;
 #define phpext_harfbuzz_ptr &harfbuzz_module_entry

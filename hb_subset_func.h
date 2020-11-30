@@ -8,7 +8,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_hb_set_add, 0, 0, 2)
 	ZEND_ARG_INFO(0, input)
-	ZEND_ARG_INFO(0, codepoint)
+	ZEND_ARG_INFO(0, s)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_hb_subset, 0, 0, 2)
