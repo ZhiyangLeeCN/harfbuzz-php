@@ -5,6 +5,7 @@
 #include "hb_font_func.h"
 #include "hb_ot_color_func.h"
 #include "hb_subset_func.h"
+#include "hb_subset_helper_func.h"
 
 PHP_MINIT_FUNCTION(harfbuzz)
 {
@@ -60,6 +61,8 @@ const zend_function_entry harfbuzz_functions[] = {
     PHP_FE(hb_set_add,                          arginfo_hb_set_add)
     PHP_FE(hb_subset,                           arginfo_hb_subset)
     PHP_FE(hb_subset_input_destroy,             arginfo_hb_subset_input_destroy)
+
+    PHP_FE(helper_hb_set_add,                   arginfo_helper_hb_set_add)
 
     PHP_FE_END
 };

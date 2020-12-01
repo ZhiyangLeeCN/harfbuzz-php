@@ -1,10 +1,16 @@
 #ifndef PHP_HB_HB_SUBSET_HELPER_H
-#define PHP_HB_HB_SUBSET_ICU_HELPER_H
+#define PHP_HB_HB_SUBSET_HELPER_H
 
-#include "cc_api_wrapper.h"
+#include "wrapper_common.h"
 
+#ifdef __cplusplus
 extern "C" {
-    size_t hb_ut_set_add(hb_set_t *codepoints, const char *s, size_t len);
-}
+#endif
+
+    zend_long hb_ut_set_add(hb_set_t *codepoints, zend_string *str);
+
+#ifdef __cplusplus
+} // extern
+#endif
 
 #endif

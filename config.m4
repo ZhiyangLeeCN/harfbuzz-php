@@ -34,7 +34,7 @@ if test "$PHP_HARFBUZZ" != "no"; then
 
     PHP_HARFBUZZ_CXX_FLAGS="$LIB_HARFBUZZ_CXX_FLAGS $LIB_ICU_CXX_FLAGS"
     PHP_HARFBUZZ_SOURCES="harfbuzz.c hb_res.c \
-			hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c"
+			hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c hb_subset_helper_func.c"
     PHP_NEW_EXTENSION(harfbuzz, $PHP_HARFBUZZ_SOURCES, $ext_shared, ,$PHP_HARFBUZZ_CXX_FLAGS)
 
     PHP_HARFBUZZ_CXX_FLAGS="$PHP_HARFBUZZ_CXX_FLAGS -std=c++11"
@@ -259,6 +259,7 @@ if test "$PHP_HARFBUZZ" != "no"; then
       third_party/icu/source/i18n/wintzimpl.cpp third_party/icu/source/i18n/zonemeta.cpp \
       third_party/icu/source/i18n/zrule.cpp third_party/icu/source/i18n/ztrans.cpp"
     PHP_ADD_SOURCES_X($HARFBUZZ_EXIT_DIR, $LIB_ICU_I18N_SOURCES, $PHP_HARFBUZZ_CXX_FLAGS, shared_objects_harfbuzz, yes)
+    
     LIB_HARFBUZZ_SOURCES="third_party/harfbuzz-ng/src/hb-aat-layout.cc third_party/harfbuzz-ng/src/hb-aat-map.cc third_party/harfbuzz-ng/src/hb-blob.cc\
 			third_party/harfbuzz-ng/src/hb-buffer-serialize.cc third_party/harfbuzz-ng/src/hb-buffer.cc third_party/harfbuzz-ng/src/hb-common.cc third_party/harfbuzz-ng/src/hb-coretext.cc third_party/harfbuzz-ng/src/hb-directwrite.cc\
 			third_party/harfbuzz-ng/src/hb-draw.cc third_party/harfbuzz-ng/src/hb-face.cc third_party/harfbuzz-ng/src/hb-fallback-shape.cc third_party/harfbuzz-ng/src/hb-font.cc third_party/harfbuzz-ng/src/hb-ft.cc third_party/harfbuzz-ng/src/hb-gdi.cc third_party/harfbuzz-ng/src/hb-glib.cc\
@@ -273,5 +274,7 @@ if test "$PHP_HARFBUZZ" != "no"; then
 			third_party/harfbuzz-ng/src/hb-shape.cc third_party/harfbuzz-ng/src/hb-shaper.cc third_party/harfbuzz-ng/src/hb-static.cc third_party/harfbuzz-ng/src/hb-style.cc third_party/harfbuzz-ng/src/hb-subset-cff-common.cc third_party/harfbuzz-ng/src/hb-subset-cff1.cc\
 			third_party/harfbuzz-ng/src/hb-subset-cff2.cc third_party/harfbuzz-ng/src/hb-subset-input.cc third_party/harfbuzz-ng/src/hb-subset-plan.cc third_party/harfbuzz-ng/src/hb-subset.cc third_party/harfbuzz-ng/src/hb-ucd.cc third_party/harfbuzz-ng/src/hb-unicode.cc third_party/harfbuzz-ng/src/hb-uniscribe.cc"
     PHP_ADD_SOURCES_X($HARFBUZZ_EXIT_DIR, $LIB_HARFBUZZ_SOURCES, $PHP_HARFBUZZ_CXX_FLAGS, shared_objects_harfbuzz, yes)
-    
+
+    CC_WRAPPER_SOURCES="cc_wrapper/hb_subset_helper.cpp"
+    PHP_ADD_SOURCES_X($HARFBUZZ_EXIT_DIR, $CC_WRAPPER_SOURCES, $PHP_HARFBUZZ_CXX_FLAGS, shared_objects_harfbuzz, yes)
 fi

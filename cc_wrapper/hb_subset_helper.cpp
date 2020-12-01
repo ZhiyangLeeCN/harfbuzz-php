@@ -2,14 +2,14 @@
 #include "unicode/utypes.h"
 #include "unicode/utext.h"
 
-size_t hb_ut_set_add(hb_set_t *codepoints, const char *s, size_t len) 
+zend_long hb_ut_set_add(hb_set_t *codepoints, zend_string *str) 
 {
-    size_t added = 0;
+    zend_long added = 0;
     UText *ut = NULL;
     UChar32 c = -1;
-    UErrorCode status;
+    UErrorCode status = U_ZERO_ERROR;
 
-    ut = utext_openUTF8(ut, s, len, &status);
+    ut = utext_openUTF8(ut, ZSTR_VAL(str), ZSTR_LEN(str), &status);
     if (U_FAILURE(status)) {
         goto error;
     }
