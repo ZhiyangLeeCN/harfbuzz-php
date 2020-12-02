@@ -62,7 +62,7 @@ const zend_function_entry harfbuzz_functions[] = {
     PHP_FE(hb_subset,                           arginfo_hb_subset)
     PHP_FE(hb_subset_input_destroy,             arginfo_hb_subset_input_destroy)
 
-    PHP_FE(helper_hb_set_add,                   arginfo_helper_hb_set_add)
+    PHP_FE(help_hb_set_add,                   arginfo_help_hb_set_add)
 
     PHP_FE_END
 };

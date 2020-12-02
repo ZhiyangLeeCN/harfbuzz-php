@@ -18,7 +18,7 @@ if (PHP_HARFBUZZ != "no") {
 	
 	EXTENSION("harfbuzz", "harfbuzz.c hb_res.c\
 		hb_blob_func.c hb_face_func.c hb_font_func.c hb_ot_color_func.c hb_subset_func.c hb_subset_helper_func.c", true, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1\
-		-wd4244 -wd4267 -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_WARNINGS -DU_DISABLE_VERSION_SUFFIX=0" + " " + libIcuCxxFlags + " " + libHarfbuzzCxxFlags);
+		-wd4244 -wd4267 -DZEND_WIN32_KEEP_INLINE -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_WARNINGS -DU_DISABLE_VERSION_SUFFIX=0" + " " + libIcuCxxFlags + " " + libHarfbuzzCxxFlags);
 	
 	ADD_SOURCES(configure_module_dirname + "/cc_wrapper", "hb_subset_helper.cpp", "harfbuzz");
 	ADD_SOURCES(configure_module_dirname + "/third_party/icu/source/stubdata", "stubdata.cpp", "harfbuzz");

@@ -1,6 +1,6 @@
 #include "hb_subset_helper_func.h"
 
-PHP_FUNCTION(helper_hb_set_add)
+PHP_FUNCTION(help_hb_set_add)
 {
     zval *val = NULL;
     zend_string *str = NULL;

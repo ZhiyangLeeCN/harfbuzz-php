@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-    #include "php_harfbuzz.h"
+#include "../php_harfbuzz.h"
     
 #ifdef __cplusplus
 } // extern
