@@ -1,0 +1,16 @@
+name: build-test
+on: [push, pull_request]
+jobs:
+  test-build-ubuntu-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: phpize
+        run: phpize
+
+      - name: configure
+        run: ./configure
+
+      - name: build
+        run: make -j$(sysctl -n hw.ncpu)
