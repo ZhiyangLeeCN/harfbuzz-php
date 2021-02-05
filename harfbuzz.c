@@ -1,6 +1,7 @@
 #include "php_harfbuzz.h"
 
 #include "hb_blob_func.h"
+#include "hb_set_func.h"
 #include "hb_face_func.h"
 #include "hb_font_func.h"
 #include "hb_ot_color_func.h"
@@ -45,6 +46,13 @@ const zend_function_entry harfbuzz_functions[] = {
     PHP_FE(hb_blob_write_data,                  arginfo_hb_blob_write_data)
     PHP_FE(hb_blob_destroy,                     arginfo_hb_blob_destroy)
 
+    PHP_FE(hb_set_create,                       arginfo_hb_set_create)
+    PHP_FE(hb_set_add,                          arginfo_hb_set_add)
+    PHP_FE(hb_set_has,                          arginfo_hb_set_has)
+    PHP_FE(hb_set_del,                          arginfo_hb_set_del)
+    PHP_FE(hb_set_is_empty,                     arginfo_hb_set_is_empty)
+    PHP_FE(hb_set_destroy,                      arginfo_hb_set_destroy)
+
     PHP_FE(hb_face_create,                      arginfo_hb_face_create)
     PHP_FE(hb_face_count,                       arginfo_hb_face_count)
     PHP_FE(hb_face_destroy,                     arginfo_hb_face_destroy)
@@ -58,11 +66,12 @@ const zend_function_entry harfbuzz_functions[] = {
     PHP_FE(hb_ot_color_glyph_reference_svg,     arginfo_hb_ot_color_glyph_reference_svg)
 
     PHP_FE(hb_subset_input_create_or_fail,      arginfo_hb_subset_input_create_or_fail)
-    PHP_FE(hb_set_add,                          arginfo_hb_set_add)
     PHP_FE(hb_subset,                           arginfo_hb_subset)
+    PHP_FE(hb_subset_input_unicode_set,         arginfo_hb_subset_input_unicode_set)
+    PHP_FE(hb_subset_input_drop_tables_set,     arginfo_hb_subset_input_drop_tables_set)
     PHP_FE(hb_subset_input_destroy,             arginfo_hb_subset_input_destroy)
 
-    PHP_FE(help_hb_set_add,                   arginfo_help_hb_set_add)
+    PHP_FE(help_add_subset_input_unicode_set,   arginfo_help_add_subset_input_unicode_set)
 
     PHP_FE_END
 };

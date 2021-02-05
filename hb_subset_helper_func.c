@@ -1,6 +1,6 @@
 #include "hb_subset_helper_func.h"
 
-PHP_FUNCTION(help_hb_set_add)
+PHP_FUNCTION(help_add_subset_input_unicode_set)
 {
     zval *val = NULL;
     zend_string *str = NULL;
@@ -11,9 +11,8 @@ PHP_FUNCTION(help_hb_set_add)
         Z_PARAM_STR(str)
     ZEND_PARSE_PARAMETERS_END();
 
-    hb_subset_input_t *input = PHP_HB_RES_FETCH(Z_RES_P(val), hb_subset_input_t);
-    hb_set_t *codepoints = hb_subset_input_unicode_set (input);
+    hb_set_t *set = PHP_HB_RES_FETCH(Z_RES_P(val), hb_set_t);
 
-    z_added = hb_ut_set_add(codepoints, str);
+    z_added = hb_ut_set_add(set, str);
     RETURN_LONG(z_added);
 }

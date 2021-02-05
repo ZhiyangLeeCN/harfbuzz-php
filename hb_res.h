@@ -23,6 +23,7 @@
     PHP_HB_RES_ID(name) = zend_register_list_destructors_ex(res_dtor, NULL, #name, module_number)
 
 DEF_EXTERN_PHP_HB_RES_ID(hb_blob_t);
+DEF_EXTERN_PHP_HB_RES_ID(hb_set_t);
 DEF_EXTERN_PHP_HB_RES_ID(hb_face_t);
 DEF_EXTERN_PHP_HB_RES_ID(hb_font_t);
 DEF_EXTERN_PHP_HB_RES_ID(hb_subset_input_t);
