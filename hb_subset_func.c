@@ -35,7 +35,6 @@ PHP_FUNCTION(hb_subset)
 
     hb_face_t *face = PHP_HB_RES_FETCH(Z_RES_P(face_val), hb_face_t);
     hb_subset_input_t *input = PHP_HB_RES_FETCH(Z_RES_P(input_val), hb_subset_input_t);
-    hb_set_t *codepoints = hb_subset_input_unicode_set (input);
 
     hb_face_t *result = hb_subset(face, input);
     RETURN_PHP_HB_RES(result, PHP_HB_RES_ID(hb_face_t));
