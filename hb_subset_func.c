@@ -1,5 +1,4 @@
 #include "hb_subset_func.h"
-#include "cc_wrapper/hb_subset_helper.h"
 
 PHP_FUNCTION(hb_subset_input_create_or_fail)
 {

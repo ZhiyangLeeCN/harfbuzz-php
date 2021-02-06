@@ -51,6 +51,7 @@ const zend_function_entry harfbuzz_functions[] = {
     PHP_FE(hb_set_has,                          arginfo_hb_set_has)
     PHP_FE(hb_set_del,                          arginfo_hb_set_del)
     PHP_FE(hb_set_is_empty,                     arginfo_hb_set_is_empty)
+    PHP_FE(hb_set_reference,                    arginfo_hb_set_reference)
     PHP_FE(hb_set_destroy,                      arginfo_hb_set_destroy)
 
     PHP_FE(hb_face_create,                      arginfo_hb_face_create)
