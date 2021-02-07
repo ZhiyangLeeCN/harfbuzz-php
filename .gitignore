@@ -36,3 +36,4 @@ tests/*/*.sh
 .vscode
 .deps
 .idea
+/tmp-php.ini

@@ -13,4 +13,8 @@ jobs:
       - run:
           name: Build
           command: |
-            make
+            make -j$(sysctl -n hw.ncpu)
+      - run:
+          name: Test
+          command: |
+            make test
