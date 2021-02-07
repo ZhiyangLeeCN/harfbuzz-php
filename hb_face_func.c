@@ -10,7 +10,7 @@ PHP_FUNCTION(hb_face_count)
 
     hb_blob_t *blob = PHP_HB_RES_FETCH(Z_RES_P(val), hb_blob_t);
     unsigned int count = hb_face_count(blob);
-    RETURN_LONG(count);
+    RETURN_LONG(count)
 }
 
 PHP_FUNCTION(hb_face_create)
@@ -40,7 +40,7 @@ PHP_FUNCTION(hb_face_get_glyph_count)
     hb_face_t *face = PHP_HB_RES_FETCH(Z_RES_P(val), hb_face_t);
     unsigned int glyph_count = hb_face_get_glyph_count(face);
 
-    RETURN_LONG(glyph_count);
+    RETURN_LONG(glyph_count)
 }
 
 PHP_FUNCTION(hb_face_reference_blob)
