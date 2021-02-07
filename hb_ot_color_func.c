@@ -26,7 +26,6 @@ PHP_FUNCTION(hb_ot_color_glyph_reference_svg)
     
     hb_face_t *face = PHP_HB_RES_FETCH(Z_RES_P(val), hb_face_t);
     hb_blob_t *blob = hb_ot_color_glyph_reference_svg(face, (hb_codepoint_t)glyph_id);
-    unsigned int length = hb_blob_get_length(blob);
 
     RETURN_PHP_HB_RES(blob, PHP_HB_RES_ID(hb_blob_t));
 }
